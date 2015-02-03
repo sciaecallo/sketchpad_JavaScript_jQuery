@@ -29,10 +29,15 @@ $(document).ready(function(){
 	$("#resize").on("click", "button", function() {
 		$("#container > div").remove();
 		x = window.prompt("Let's change the size of our squares... With how many squares per side do you want to play?");
-		size = (500/x) + "px";
-		sketch();
-		colour("green");
-		cancel();
+		if(x < 63) {
+			size = (500/x) + "px";
+			sketch();
+			colour("green");
+			cancel();
+		}
+		else {
+			window.alert("Warning! You can't divide this sketchpad in more than 62 squares!! Please resize it again with less ;)");
+		} 
 	});
 	
 	var letters = 0;
@@ -44,11 +49,13 @@ $(document).ready(function(){
     	    color += letters[Math.floor(Math.random() * 16)];
     	}
     	return color;
-	};
+	}
 	$("#woodstock").on("click", "button", function() {
 		$("#container > div").remove();
 		sketch();
 		cancel();
-			$("#container > div").find("div").on("mouseenter", colour(getRandomColor));
+			$("#container > div").find("div").on("mouseenter", function(){
+				colour(getRandomColor);
+			});
 	});
 });
